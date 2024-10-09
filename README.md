@@ -1,2 +1,3 @@
 # Mazava_landing
-The Mazava landing page
+This is the Mazava landing project
+
