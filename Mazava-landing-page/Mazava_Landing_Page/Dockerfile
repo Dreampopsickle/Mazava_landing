@@ -11,15 +11,18 @@ COPY . .
 
 RUN npm run build
 
+# Verify the build output
+RUN echo "Contents of /app/.svelte-kit/output/server:" && ls -l /app/.svelte-kit/output/server
+
 FROM node:20-slim AS production
 
 WORKDIR /app
 
-COPY --from=build /app/.svelte-kit/output ./build
+COPY --from=build /app/.svelte-kit/output/server ./build
 COPY package*.json ./
 
 RUN npm install --omit=dev
 
-EXPOSE 3030
+EXPOSE 3000
 
-CMD ["node", "./build/index.js", "--host"]
+CMD [ "node", "./build/index.js" ]
