@@ -15,11 +15,11 @@ FROM node:20-slim AS production
 
 WORKDIR /app
 
-COPY --from=build /app/build ./build
+COPY --from=build /app/.svelte-kit/output ./build
 COPY package*.json ./
 
 RUN npm install --omit=dev
 
 EXPOSE 3030
 
-CMD ["node", "./build/index.js"]
+CMD ["node", "./build/index.js", "--host"]
